@@ -1,4 +1,6 @@
 import Staff.Staff;
+
+import java.sql.Driver;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +54,8 @@ public class Main {
         }
     }
 
+
+
     //未写完
     public void searchStaffInformation(int id){
         int temp=0,index=-1;
@@ -90,6 +94,42 @@ public class Main {
         }
     }//按id查询
 
+    public void runMenu() {
+        System.out.println("///////////////////////////////////////");
+        System.out.println("Staff Management System V1.0");
+        System.out.println("///////////////////////////////////////");
+        System.out.println("Now Loading.......");
+        try {
+            System.out.print("...");
+            TimeUnit.SECONDS.sleep(1);
+            System.out.print("...");
+            TimeUnit.SECONDS.sleep(1);
+            System.out.println("...");
+            System.out.println();
+        }
+        catch(Exception e) {}
+        System.out.println("Lording Complete!"); 
+        while(true)
+        {
+            int command=displayMenu();
+            if(command == -1)
+            {
+                System.out.println("Wrong Command!");
+                System.out.println("Now Reloading.......");
+                try {
+                    System.out.print("...");
+                    TimeUnit.SECONDS.sleep(1);
+                    System.out.print("...");
+                    TimeUnit.SECONDS.sleep(1);
+                    System.out.println("...");
+                    System.out.println();
+                }
+                catch(Exception e) {}
+                System.out.println("Reloading Complete!");
+            }
+        }
+    }
+
     public void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
@@ -98,19 +138,22 @@ public class Main {
     public int displayMenu(){
         clearScreen();
         System.out.println("---Welcome---");
-        System.out.println("Staff Mnagement");
+        System.out.println("Staff Management System");
         System.out.println("-------------------");
-        System.out.println("1.List All staff");
-        System.out.println("2.Add a New staff");
-        System.out.println("3.Find staff");
-        System.out.println("4.Delete staff");
-        System.out.println("5.Exit");
-        System.out.print("Enter your choice");
+        System.out.println("1) List All staff");
+        System.out.println("2) Add a New staff");
+        System.out.println("3) Find staff");
+        System.out.println("4) Delete staff");
+        System.out.println("0) Exit");
+        System.out.println("-------------------");
+        System.out.print("Please enter your choice : ");
         int option = input.nextInt();
-        return option;
+        if (option>=0 && option<=4)return option;
+        else return -1;
     }
     public static void main(String[] args) {
-
-
+        Main main = new Main();
+        main.clearScreen();
+        main.runMenu();
     }
 }
