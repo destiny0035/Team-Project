@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-//TIP 要<b>运行</b>代码，请按 <shortcut actionId="Run"/> 或
-// 点击装订区域中的 <icon src="AllIcons.Actions.Execute"/> 图标。
 public class Main {
     private List<Staff> staff = new ArrayList<>();
     Scanner input = new Scanner(System.in);
@@ -54,7 +52,37 @@ public class Main {
         }
     }
 
-
+    //未写完set部分与检查部分
+    public void editStaffInformation(int index){
+        int newAge,newIncome;
+        long newId;
+        String newName,newPosition,newGender;
+        System.out.println("Please enter new information: ");
+        System.out.println("Original Name: "+staff.get(index).getName());
+        System.out.print("New Name: ");
+        newName = input.nextLine();
+        System.out.println();
+        System.out.println("Original Age: "+staff.get(index).getAge());
+        System.out.print("New Age: ");
+        newAge = input.nextInt();
+        System.out.println();
+        System.out.println("Original Id: "+staff.get(index).getId());
+        System.out.print("New Id: ");
+        newId = input.nextLong();
+        System.out.println();
+        System.out.println("Original Gender: "+staff.get(index).getGender());
+        System.out.print("New Gender: ");
+        newGender = input.nextLine();
+        System.out.println();
+        System.out.println("Original Position: "+staff.get(index).getPosition());
+        System.out.print("New Position: ");
+        newPosition = input.nextLine();
+        System.out.println();
+        System.out.println("Original Income: "+staff.get(index).getIncome());
+        System.out.print("New Income: ");
+        newIncome = input.nextInt();
+        System.out.println();
+    }
 
     //未写完
     public void searchStaffInformation(int id){
@@ -84,11 +112,13 @@ public class Main {
             //记得写一个新的编辑函数
             if(operation == "Yes" || operation == "yes" || operation == "YES")
             {
-                //TimeUnit.SECONDS.sleep(1);;
+                editStaffInformation(index);
+                return;
             }
             else if(operation == "No" || operation == "no" || operation == "NO")
             {
-                ;
+                System.out.println("Backing to the menu......");
+                return;
             }
             else System.out.println("Wrong Command!");
         }
@@ -108,7 +138,8 @@ public class Main {
             System.out.println();
         }
         catch(Exception e) {}
-        System.out.println("Lording Complete!"); 
+        System.out.println("Lording Complete!");
+        
         while(true)
         {
             int command=displayMenu();
