@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class Main {
-    private List<Staff> staff = new ArrayList<>();
+class Main {
+    private List<Staff>staff = new ArrayList<>();
     Scanner input = new Scanner(System.in);
 
     public void ListAllStaff(){
@@ -17,29 +17,29 @@ public class Main {
             System.out.println("The employee information is as follows:");
             for (Staff AllStaff : staff) {//修改了一下输出，使首字母为大写且加入冒号
                 System.out.println("Name: "+AllStaff.getName()+
-                                   "Age: "+AllStaff.getAge()+
-                                    "Id: "+AllStaff.getId()+
-                                    "Gender: "+AllStaff.getGender()+
-                                    "Position: "+AllStaff.getPosition()+
-                                    "Income: "+AllStaff.getIncome());
+                        "Age: "+AllStaff.getAge()+
+                        "Id: "+AllStaff.getId()+
+                        "Gender: "+AllStaff.getGender()+
+                        "Position: "+AllStaff.getPosition()+
+                        "Income: "+AllStaff.getIncome());
             }
         }
     }
 
     public void addStaffInformation(Staff extraStaff){
-         staff.add(extraStaff);
+        staff.add(extraStaff);
         System.out.println("employee information added successfully");
     }
 
-    public void deleteStaffInformation(String name){
+    public void deleteStaffInformation(int id){
         for (int i=0;i<staff.size();i++){
-            if (staff.get(i).getName() == name){
+            if (staff.get(i).getId() == id){
                 staff.remove(i);
             }else {
                 System.out.println("no employee deleted");
             }
         }
-    }//也许要改成用ID查找？
+    }
 
     public void filterStaffInformation(String gender,int maxAge,int minAge,double income){
         List <Staff> requiredStaff = new ArrayList<>();
@@ -94,17 +94,19 @@ public class Main {
                 temp+=1;
             }
         }
-        if(temp==0)System.out.println("Your search did not match any staff");
+        if(temp==0) {
+            System.out.println("Your search did not match any staff");
+        }
         else
         {
             System.out.println("Find staff "+ id);
             System.out.println
                     ("Name: "+staff.get(index).getName()+
-                    "Age: "+staff.get(index).getAge()+
-                    "Id: "+staff.get(index).getId()+
-                    "Gender: "+staff.get(index).getGender()+
-                    "Position: "+staff.get(index).getPosition()+
-                    "Income: "+staff.get(index).getIncome());
+                            "Age: "+staff.get(index).getAge()+
+                            "Id: "+staff.get(index).getId()+
+                            "Gender: "+staff.get(index).getGender()+
+                            "Position: "+staff.get(index).getPosition()+
+                            "Income: "+staff.get(index).getIncome());
             System.out.println(" ");
             System.out.println("Do you want to edit this staff's information?");
             System.out.println("(Please enter Yes or No))");
@@ -120,7 +122,9 @@ public class Main {
                 System.out.println("Backing to the menu......");
                 return;
             }
-            else System.out.println("Wrong Command!");
+            else {
+                System.out.println("Wrong Command!");
+            }
         }
     }//按id查询
 
@@ -139,7 +143,7 @@ public class Main {
         }
         catch(Exception e) {}
         System.out.println("Lording Complete!");
-        
+
         while(true)
         {
             int command=displayMenu();
@@ -155,18 +159,51 @@ public class Main {
                     System.out.println("...");
                     System.out.println();
                 }
-                catch(Exception e) {}
-                System.out.println("Reloading Complete!");
+                catch(Exception e) {
+                    System.out.println("Reloading Complete!");
+                }
+                if (command == 0){
+                    System.out.println("All staff are listed");
+                    ListAllStaff();}
+            } else if (command ==1){
+                System.out.println("A new staff is added");
+                System.out.print("please input an extra staff: ");
+                String str1 = input.nextLine();
+                System.out.println("The added staff is :" + str1);
+            } else if  (command ==2){
+                System.out.println("The staff is found");
+                System.out.print("please input an id: ");
+                int a = input.nextInt();
+                searchStaffInformation(a);
+                System.out.println("the staff you want to find is" + a);
+
+            }else if (command ==3){
+                System.out.println("The staff is deleted");
+                System.out.println("please input a staff you want to delete: ");
+                int b = input.nextInt();
+                System.out.println("the staff you want yo delete is"+b);
+                deleteStaffInformation(b);
+            }else if (command == 4){
+                System.out.println("The staff information is filtered");
+                System.out.println("gender:  "+"minAge:+  "+"maxAge:  "+"income:  ");
+                String c = input.nextLine();
+                int d = input.nextInt();
+                int e = input.nextInt();
+                double f = input.nextDouble();
+                filterStaffInformation(c,d,e,f);
+                System.out.println("filtered successfully");
             }
         }
+
     }
+
 
     public void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
-    public int displayMenu(){
+    public int displayMenu() {
         clearScreen();
         System.out.println("---Welcome---");
         System.out.println("Staff Management System");
@@ -179,12 +216,17 @@ public class Main {
         System.out.println("-------------------");
         System.out.print("Please enter your choice : ");
         int option = input.nextInt();
-        if (option>=0 && option<=4)return option;
-        else return -1;
+        if (option >= 0 && option <= 4)
+            return option;
+        else {
+            return -1;
+        }
     }
     public static void main(String[] args) {
         Main main = new Main();
         main.clearScreen();
         main.runMenu();
+        main.ListAllStaff();
     }
 }
+
