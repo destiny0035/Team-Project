@@ -128,6 +128,8 @@ class Main {
         }
     }//按id查询
 
+    //1234567
+
     public void runMenu() {
         System.out.println("///////////////////////////////////////");
         System.out.println("Staff Management System V1.0");
