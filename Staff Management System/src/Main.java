@@ -71,23 +71,27 @@ class Main {
         {
             System.out.println("Find staff "+ id);
             System.out.println
-                    ("Name: "+staff.get(index).getName()+
-                            "Age: "+staff.get(index).getAge()+
-                            "Id: "+staff.get(index).getId()+
-                            "Gender: "+staff.get(index).getGender()+
-                            "Position: "+staff.get(index).getPosition()+
+                    ("Name: "+staff.get(index).getName()+" "+
+                            "Age: "+staff.get(index).getAge()+" "+
+                            "Id: "+staff.get(index).getId()+" "+
+                            "Gender: "+staff.get(index).getGender()+" "+
+                            "Position: "+staff.get(index).getPosition()+" "+
                             "Income: "+staff.get(index).getIncome());
             System.out.println(" ");
+            input.nextLine();
             System.out.println("Do you want to edit this staff's information?");
             System.out.println("(Please enter Yes or No))");
             String operation = input.nextLine();
-            //记得写一个新的编辑函数
-            if(operation == "Yes" || operation == "yes" || operation == "YES")
+            if(operation.equals("Yes") || operation.equals("yes")  || operation.equals("YES"))
             {
-                editStaffInformation(index);
-                return;
+                if(editStaffInformation(index))
+                {
+                    System.out.println("Information is edited successfully!");
+                    System.out.println("Backing to the menu......");
+                }
+                else return;
             }
-            else if(operation == "No" || operation == "no" || operation == "NO")
+            else if(operation.equals("No") || operation.equals("no") || operation.equals("NO"))
             {
                 System.out.println("Backing to the menu......");
                 return;
@@ -102,8 +106,9 @@ class Main {
         int newAge,newIncome;
         long newId;
         String newName,newPosition,newGender;
+        Staff target=staff.get(index);
         System.out.println("Please enter new information: ");
-        System.out.println("Original Name: "+staff.get(index).getName());
+        System.out.println("Original Name: "+target.getName());
         System.out.print("New Name: ");
         newName = input.nextLine();
         if(newName==null||newName.length()>20) {
@@ -111,8 +116,9 @@ class Main {
             System.out.println("Reloading......");
             return false;
         }
+        target.setName(newName);
         System.out.println();
-        System.out.println("Original Age: "+staff.get(index).getAge());
+        System.out.println("Original Age: "+target.getAge());
         System.out.print("New Age: ");
         newAge = input.nextInt();
         if(newAge<18||newAge>60){
@@ -120,22 +126,48 @@ class Main {
             System.out.println("Reloading......");
             return false;
         }
+        target.setAge(newAge);
         System.out.println();
-        System.out.println("Original Id: "+staff.get(index).getId());
+        System.out.println("Original Id: "+target.getId());
         System.out.print("New Id: ");
         newId = input.nextLong();
+        if(newId<0||newId>=1.00E12){
+            System.out.println("The input is wrong");
+            System.out.println("Reloading......");
+            return false;
+        }
+        target.setId(newId);
         System.out.println();
-        System.out.println("Original Gender: "+staff.get(index).getGender());
+        System.out.println("Original Gender: "+target.getGender());
         System.out.print("New Gender: ");
+        input.nextLine();
         newGender = input.nextLine();
+        if(!"Male".equals(newGender)&&!"Female".equals(newGender)){
+            System.out.println("The input is wrong");
+            System.out.println("Reloading......");
+            return false;
+        }
+        target.setGender(newGender);
         System.out.println();
-        System.out.println("Original Position: "+staff.get(index).getPosition());
+        System.out.println("Original Position: "+target.getPosition());
         System.out.print("New Position: ");
         newPosition = input.nextLine();
+        if(!"Manager".equals(newPosition)&&!"Staff".equals(newPosition)) {
+            System.out.println("The input is wrong");
+            System.out.println("Reloading......");
+            return false;
+        }
+        target.setPosition(newPosition);
         System.out.println();
-        System.out.println("Original Income: "+staff.get(index).getIncome());
+        System.out.println("Original Income: "+target.getIncome());
         System.out.print("New Income: ");
         newIncome = input.nextInt();
+        if(newIncome<0.0){
+            System.out.println("The input is wrong");
+            System.out.println("Reloading......");
+            return false;
+        }
+        target.setIncome(newIncome);
         System.out.println();
         return true;
     }
@@ -176,7 +208,7 @@ class Main {
             }
             if (command == 1)
             {
-                System.out.println("All staff are listed");
+                //System.out.println("All staff are listed");
                 ListAllStaff();
             }
             else if (command == 2)
@@ -202,7 +234,6 @@ class Main {
                     System.out.println("Reloading......");
                     continue;
                 }
-                System.out.println(id_1);
                 System.out.println("Enter the gender of the staff (Male/Female): ");
                 input.nextLine();
                 String gender_1 = input.nextLine();
@@ -231,19 +262,18 @@ class Main {
             }
             else if  (command ==3)
             {
-                System.out.println("The staff is found");
-                System.out.print("please input an id: ");
+                System.out.print("Please input an id: ");
                 int a = input.nextInt();
                 searchStaffInformation(a);
-                System.out.println("the staff you want to find is" + a);
+                System.out.println();
             }
             else if (command ==4)
             {
-                System.out.println("The staff is deleted");
-                System.out.println("please input a staff you want to delete: ");
+                System.out.println("Please input a staff you want to delete: ");
                 int b = input.nextInt();
-                System.out.println("the staff you want yo delete is"+b);
+                System.out.println("The staff you want yo delete is"+b);
                 deleteStaffInformation(b);
+                System.out.println("The staff is deleted");
             }
             else if (command == 5)
             {
@@ -254,7 +284,7 @@ class Main {
                 int e = input.nextInt();
                 double f = input.nextDouble();
                 filterStaffInformation(c,d,e,f);
-                System.out.println("filtered successfully");
+                System.out.println("Filtered successfully!");
             }
         }
 
@@ -277,11 +307,13 @@ class Main {
         System.out.println("2) Add a New staff");
         System.out.println("3) Find & Edit staff");
         System.out.println("4) Delete staff");
+        System.out.println("5) Filter staff");
         System.out.println("0) Exit");
         System.out.println("-------------------");
         System.out.println();
         System.out.print("Please enter your choice : ");
         int option = input.nextInt();
+        System.out.println();
         if (option >= 0 && option <= 4)
             return option;
         else {
