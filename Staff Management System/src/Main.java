@@ -31,7 +31,7 @@ class Main {
         staff.add(extraStaff);
         System.out.println("employee information added successfully");
     }
-    
+
     public void deleteStaffInformation(int id){
         for (int i=0;i<staff.size();i++){
             if (staff.get(i).getId() == id){
@@ -167,7 +167,7 @@ class Main {
                 if (command == 0){
                     System.out.println("All staff are listed");
                     ListAllStaff();}
-            } else if (command ==1){
+            } else if (command ==1){//控制条件
                 System.out.println("Enter the name of the staff");
 
                 String name_1 = input.nextLine();
