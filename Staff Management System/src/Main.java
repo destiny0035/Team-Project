@@ -180,40 +180,45 @@ class Main {
                 catch(Exception e) {
                     System.out.println("Reloading Complete!");
                 }
-                if (command == 0){
-                    System.out.println("All staff are listed");
-                    ListAllStaff();}
-            } else if (command ==1){
-                System.out.println("A new staff is added");
-                System.out.print("please input an extra staff: ");
-                Staff information = fill_thestaff();
+                switch (command){
+                    case 0:
+                        System.out.println("exit");
+                        break;
+                    case 1:
+                        System.out.println("All staff are listed");
+                        ListAllStaff();
 
-                addStaffInformation(information);
-                System.out.println("The added staff is :" );
-            } else if  (command ==2){
-                System.out.println("The staff is found");
-                System.out.print("please input an id: ");
-                int a = input.nextInt();
-                searchStaffInformation(a);
-                System.out.println("the staff you want to find is" + a);
+                        break;
+                    case 2:
+                        System.out.println("A new staff is added");
+                        System.out.print("please input an extra staff: ");
+                        Staff information = fill_thestaff();
 
-            }else if (command ==3){
-                System.out.println("The staff is deleted");
-                System.out.println("please input a staff you want to delete: ");
-                int b = input.nextInt();
-                System.out.println("the staff you want yo delete is"+b);
-                deleteStaffInformation(b);
-            }else if (command == 4){
-                System.out.println("The staff information is filtered");
-                System.out.println("gender:  "+"minAge:+  "+"maxAge:  "+"income:  ");
-                String c = input.nextLine();
-                int d = input.nextInt();
-                int e = input.nextInt();
-                double f = input.nextDouble();
-                filterStaffInformation(c,d,e,f);
-                System.out.println("filtered successfully");
-            }
-        }
+                        addStaffInformation(information);
+                        System.out.println("The added staff is :" );
+                        break;
+                    case 3:
+                        System.out.println("The staff is deleted");
+                        System.out.println("please input a staff you want to delete: ");
+                        int b = input.nextInt();
+                        System.out.println("the staff you want yo delete is"+b);
+                        deleteStaffInformation(b);
+
+                        break;
+                    case 4:
+                        System.out.println("The staff information is filtered");
+                        System.out.println("gender:  "+"minAge:+  "+"maxAge:  "+"income:  ");
+                        String c = input.nextLine();
+                        int d = input.nextInt();
+                        int e = input.nextInt();
+                        double f = input.nextDouble();
+                        filterStaffInformation(c,d,e,f);
+                        System.out.println("filtered successfully");
+
+                        break;
+                }
+
+
 
     }
 
