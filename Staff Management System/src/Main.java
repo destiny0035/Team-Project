@@ -196,9 +196,10 @@ class Main {
                     System.out.println("The input is wrong");
                     continue;
                 }
-                System.out.println("Enter the position of the staff");
+                System.out.println("Enter the position of the staff manager/staff" );
+
                 String position_1 = input.nextLine();
-                if(position_1==null) {
+                if(!"manager".equals(position_1)&&!"staff".equals(position_1)) {
                     System.out.println("The input is wrong");
                     continue;
                 }
