@@ -17,11 +17,11 @@ class Main {
         }else{
             System.out.println("The employee information is as follows:");
             for (Staff AllStaff : staff) {//修改了一下输出，使首字母为大写且加入冒号
-                System.out.println("Name: "+AllStaff.getName()+
-                        "Age: "+AllStaff.getAge()+
-                        "Id: "+AllStaff.getId()+
-                        "Gender: "+AllStaff.getGender()+
-                        "Position: "+AllStaff.getPosition()+
+                System.out.println("Name: "+AllStaff.getName()+" "+
+                        "Age: "+AllStaff.getAge()+" "+
+                        "Id: "+AllStaff.getId()+" "+
+                        "Gender: "+AllStaff.getGender()+" "+
+                        "Position: "+AllStaff.getPosition()+" "+
                         "Income: "+AllStaff.getIncome());
             }
         }
@@ -146,11 +146,12 @@ class Main {
         }
         catch(Exception e) {}
         System.out.println("Lording Complete!");
-
         while(true)
         {
             int command = displayMenu();
-            if (command == -1) {
+            input.nextLine();
+            if (command == -1)
+            {
                 System.out.println("Wrong Command!");
                 System.out.println("Now Reloading.......");
                 try {
@@ -161,41 +162,39 @@ class Main {
                     System.out.println("...");
                     System.out.println();
                 }
-                catch(Exception e) {
-                    System.out.println("Reloading Complete!");
-                }
-                if (command == 0){
-                    System.out.println("All staff are listed");
-                    ListAllStaff();}
-            } else if (command ==1){//控制条件
+                catch(Exception e) {}
+                System.out.println("Reloading Complete!");
+            }
+            if (command == 1)
+            {
+                System.out.println("All staff are listed");
+                ListAllStaff();
+            }
+            else if (command == 2)
+            {//控制条件
                 System.out.println("Enter the name of the staff");
-
                 String name_1 = input.nextLine();
                 if(name_1==null||name_1.length()>20) {
                     System.out.println("The input is wrong");
                     System.out.println("Reloading*******");
                     continue;
                 }
-
-
-
                 System.out.println("Enter the age of the staff");
                 int age_1 = input.nextInt();
                 if(age_1<18||age_1>60){
                     System.out.println("The input is wrong");
                     System.out.println("Reloading*******");
                     continue;
-
                 }
                 System.out.println("Enter the id of the staff");
-                long id_1 = input.nextInt();
-
+                long id_1 = input.nextLong();
+                System.out.println(id_1);
                 System.out.println("Enter the gender of the staff");
+                input.nextLine();
                 String gender_1 = input.nextLine();
                 if(!"male".equals(gender_1)&&!"female".equals(gender_1)){
                     System.out.println("The input is wrong");
                     continue;
-
                 }
                 System.out.println("Enter the position of the staff");
                 String position_1 = input.nextLine();
@@ -205,28 +204,28 @@ class Main {
                 }
                 System.out.println("Enter the income of the staff");
                 double income_1 = input.nextDouble();
-
                 Staff temp=new Staff(name_1,age_1,id_1,gender_1,position_1,income_1);
-                System.out.println("A new staff is added");
-
-
                 addStaffInformation(temp);
-                System.out.println("The added staff is :" );
-                System.out.print("please input an extra staff: ");
-            } else if  (command ==2){
+                System.out.println("New staff added successfully!");
+            }
+            else if  (command ==3)
+            {
                 System.out.println("The staff is found");
                 System.out.print("please input an id: ");
                 int a = input.nextInt();
                 searchStaffInformation(a);
                 System.out.println("the staff you want to find is" + a);
-
-            }else if (command ==3){
+            }
+            else if (command ==4)
+            {
                 System.out.println("The staff is deleted");
                 System.out.println("please input a staff you want to delete: ");
                 int b = input.nextInt();
                 System.out.println("the staff you want yo delete is"+b);
                 deleteStaffInformation(b);
-            }else if (command == 4){
+            }
+            else if (command == 5)
+            {
                 System.out.println("The staff information is filtered");
                 System.out.println("gender:  "+"minAge:+  "+"maxAge:  "+"income:  ");
                 String c = input.nextLine();
