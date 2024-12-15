@@ -53,37 +53,6 @@ class Main {
         }
     }
 
-    //未写完set部分与检查部分
-    public void editStaffInformation(int index){
-        int newAge,newIncome;
-        long newId;
-        String newName,newPosition,newGender;
-        System.out.println("Please enter new information: ");
-        System.out.println("Original Name: "+staff.get(index).getName());
-        System.out.print("New Name: ");
-        newName = input.nextLine();
-        System.out.println();
-        System.out.println("Original Age: "+staff.get(index).getAge());
-        System.out.print("New Age: ");
-        newAge = input.nextInt();
-        System.out.println();
-        System.out.println("Original Id: "+staff.get(index).getId());
-        System.out.print("New Id: ");
-        newId = input.nextLong();
-        System.out.println();
-        System.out.println("Original Gender: "+staff.get(index).getGender());
-        System.out.print("New Gender: ");
-        newGender = input.nextLine();
-        System.out.println();
-        System.out.println("Original Position: "+staff.get(index).getPosition());
-        System.out.print("New Position: ");
-        newPosition = input.nextLine();
-        System.out.println();
-        System.out.println("Original Income: "+staff.get(index).getIncome());
-        System.out.print("New Income: ");
-        newIncome = input.nextInt();
-        System.out.println();
-    }
 
     //未写完
     public void searchStaffInformation(int id){
@@ -129,7 +98,47 @@ class Main {
         }
     }//按id查询
 
-    //1234567
+    public boolean editStaffInformation(int index){
+        int newAge,newIncome;
+        long newId;
+        String newName,newPosition,newGender;
+        System.out.println("Please enter new information: ");
+        System.out.println("Original Name: "+staff.get(index).getName());
+        System.out.print("New Name: ");
+        newName = input.nextLine();
+        if(newName==null||newName.length()>20) {
+            System.out.println("The input is wrong!");
+            System.out.println("Reloading......");
+            return false;
+        }
+        System.out.println();
+        System.out.println("Original Age: "+staff.get(index).getAge());
+        System.out.print("New Age: ");
+        newAge = input.nextInt();
+        if(newAge<18||newAge>60){
+            System.out.println("The input is wrong");
+            System.out.println("Reloading......");
+            return false;
+        }
+        System.out.println();
+        System.out.println("Original Id: "+staff.get(index).getId());
+        System.out.print("New Id: ");
+        newId = input.nextLong();
+        System.out.println();
+        System.out.println("Original Gender: "+staff.get(index).getGender());
+        System.out.print("New Gender: ");
+        newGender = input.nextLine();
+        System.out.println();
+        System.out.println("Original Position: "+staff.get(index).getPosition());
+        System.out.print("New Position: ");
+        newPosition = input.nextLine();
+        System.out.println();
+        System.out.println("Original Income: "+staff.get(index).getIncome());
+        System.out.print("New Income: ");
+        newIncome = input.nextInt();
+        System.out.println();
+        return true;
+    }
 
     public void runMenu() {
         System.out.println("///////////////////////////////////////");
@@ -171,39 +180,40 @@ class Main {
                 ListAllStaff();
             }
             else if (command == 2)
-            {//控制条件
-                System.out.println("Enter the name of the staff");
+            {
+                System.out.println("Enter the name of the staff: ");
                 String name_1 = input.nextLine();
                 if(name_1==null||name_1.length()>20) {
                     System.out.println("The input is wrong");
-                    System.out.println("Reloading*******");
+                    System.out.println("Reloading......");
                     continue;
                 }
-                System.out.println("Enter the age of the staff");
+                System.out.println("Enter the age of the staff: ");
                 int age_1 = input.nextInt();
                 if(age_1<18||age_1>60){
                     System.out.println("The input is wrong");
-                    System.out.println("Reloading*******");
+                    System.out.println("Reloading......");
                     continue;
                 }
-                System.out.println("Enter the id of the staff");
+                System.out.println("Enter the id of the staff: ");
                 long id_1 = input.nextLong();
                 System.out.println(id_1);
-                System.out.println("Enter the gender of the staff");
+                System.out.println("Enter the gender of the staff (Male/Female): ");
                 input.nextLine();
                 String gender_1 = input.nextLine();
-                if(!"male".equals(gender_1)&&!"female".equals(gender_1)){
+                if(!"Male".equals(gender_1)&&!"Female".equals(gender_1)){
                     System.out.println("The input is wrong");
+                    System.out.println("Reloading......");
                     continue;
                 }
-                System.out.println("Enter the position of the staff manager/staff" );
-
+                System.out.println("Enter the position of the staff (Manager/Staff): " );
                 String position_1 = input.nextLine();
-                if(!"manager".equals(position_1)&&!"staff".equals(position_1)) {
+                if(!"Manager".equals(position_1)&&!"Staff".equals(position_1)) {
                     System.out.println("The input is wrong");
+                    System.out.println("Reloading......");
                     continue;
                 }
-                System.out.println("Enter the income of the staff");
+                System.out.println("Enter the income of the staff: ");
                 double income_1 = input.nextDouble();
                 Staff temp=new Staff(name_1,age_1,id_1,gender_1,position_1,income_1);
                 addStaffInformation(temp);
@@ -249,15 +259,17 @@ class Main {
 
     public int displayMenu() {
         clearScreen();
+        System.out.println();
         System.out.println("---Welcome---");
         System.out.println("Staff Management System");
         System.out.println("-------------------");
         System.out.println("1) List All staff");
         System.out.println("2) Add a New staff");
-        System.out.println("3) Find staff");
+        System.out.println("3) Find & Edit staff");
         System.out.println("4) Delete staff");
         System.out.println("0) Exit");
         System.out.println("-------------------");
+        System.out.println();
         System.out.print("Please enter your choice : ");
         int option = input.nextInt();
         if (option >= 0 && option <= 4)
@@ -270,7 +282,7 @@ class Main {
         Main main = new Main();
         main.clearScreen();
         main.runMenu();
-        main.ListAllStaff();
+        //main.ListAllStaff();
     }
 }
 
