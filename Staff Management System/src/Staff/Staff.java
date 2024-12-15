@@ -47,7 +47,10 @@ package Staff;
         }
 
         public void setId(long id) {
-            this.id = id;
+            if(id >= 0&&id<=1.00E12) {
+                this.id = id;
+            }
+
         }
 
         public String getGender() {
@@ -55,7 +58,7 @@ package Staff;
         }
 
         public void setGender(String gender) {
-            if ("male".equals(gender) || "female".equals(gender)) {
+            if ("Male".equals(gender) || "Female".equals(gender)) {
                 this.gender = gender;
             }
         }
@@ -65,7 +68,7 @@ package Staff;
         }
 
         public void setPosition(String position) {
-            if("manager".equals(position)||"staff".equals(position)) {
+            if("Manager".equals(position)||"Staff".equals(position)) {
                 this.position = position;
             }
 
