@@ -197,6 +197,11 @@ class Main {
                 }
                 System.out.println("Enter the id of the staff: ");
                 long id_1 = input.nextLong();
+                if(id_1<0||id_1>=1.00E12){
+                    System.out.println("The input is wrong");
+                    System.out.println("Reloading......");
+                    continue;
+                }
                 System.out.println(id_1);
                 System.out.println("Enter the gender of the staff (Male/Female): ");
                 input.nextLine();
@@ -215,6 +220,11 @@ class Main {
                 }
                 System.out.println("Enter the income of the staff: ");
                 double income_1 = input.nextDouble();
+                if(income_1<0.0){
+                    System.out.println("The input is wrong");
+                    System.out.println("Reloading......");
+                    continue;
+                }
                 Staff temp=new Staff(name_1,age_1,id_1,gender_1,position_1,income_1);
                 addStaffInformation(temp);
                 System.out.println("New staff added successfully!");
