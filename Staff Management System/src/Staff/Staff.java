@@ -65,7 +65,10 @@ package Staff;
         }
 
         public void setPosition(String position) {
-            this.position = position;
+            if("manager".equals(position)||"staff".equals(position)) {
+                this.position = position;
+            }
+
         }
 
         public double getIncome() {
