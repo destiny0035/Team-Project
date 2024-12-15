@@ -1,5 +1,6 @@
 import Staff.Staff;
 
+import java.io.EOFException;
 import java.sql.Driver;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -30,23 +31,7 @@ class Main {
         staff.add(extraStaff);
         System.out.println("employee information added successfully");
     }
-    public Staff fill_thestaff(){
-        System.out.println("Enter the name of the staff");
-        String name_1 = input.nextLine();
-        System.out.println("Enter the age of the staff");
-        int age_1 = input.nextInt();
-        System.out.println("Enter the id of the staff");
-        long id_1 = input.nextInt();
-        System.out.println("Enter the gender of the staff");
-        String gender_1 = input.nextLine();
-        System.out.println("Enter the position of the staff");
-        String position_1 = input.nextLine();
-        System.out.println("Enter the income of the staff");
-        double income_1 = input.nextDouble();
-        Staff temp=new Staff(name_1,age_1,id_1,gender_1,position_1,income_1);
-        return temp;
 
-    }
     public void deleteStaffInformation(int id){
         for (int i=0;i<staff.size();i++){
             if (staff.get(i).getId() == id){
@@ -164,9 +149,8 @@ class Main {
 
         while(true)
         {
-            int command=displayMenu();
-            if(command == -1)
-            {
+            int command = displayMenu();
+            if (command == -1) {
                 System.out.println("Wrong Command!");
                 System.out.println("Now Reloading.......");
                 try {
@@ -183,13 +167,52 @@ class Main {
                 if (command == 0){
                     System.out.println("All staff are listed");
                     ListAllStaff();}
-            } else if (command ==1){
-                System.out.println("A new staff is added");
-                System.out.print("please input an extra staff: ");
-                Staff information = fill_thestaff();
+            } else if (command ==1){//控制条件
+                System.out.println("Enter the name of the staff");
 
-                addStaffInformation(information);
+                String name_1 = input.nextLine();
+                if(name_1==null||name_1.length()>20) {
+                    System.out.println("The input is wrong");
+                    System.out.println("Reloading*******");
+                    continue;
+                }
+
+
+
+                System.out.println("Enter the age of the staff");
+                int age_1 = input.nextInt();
+                if(age_1<18||age_1>60){
+                    System.out.println("The input is wrong");
+                    System.out.println("Reloading*******");
+                    continue;
+
+                }
+                System.out.println("Enter the id of the staff");
+                long id_1 = input.nextInt();
+
+                System.out.println("Enter the gender of the staff");
+                String gender_1 = input.nextLine();
+                if(!"male".equals(gender_1)&&!"female".equals(gender_1)){
+                    System.out.println("The input is wrong");
+                    continue;
+
+                }
+                System.out.println("Enter the position of the staff");
+                String position_1 = input.nextLine();
+                if(position_1==null) {
+                    System.out.println("The input is wrong");
+                    continue;
+                }
+                System.out.println("Enter the income of the staff");
+                double income_1 = input.nextDouble();
+
+                Staff temp=new Staff(name_1,age_1,id_1,gender_1,position_1,income_1);
+                System.out.println("A new staff is added");
+
+
+                addStaffInformation(temp);
                 System.out.println("The added staff is :" );
+                System.out.print("please input an extra staff: ");
             } else if  (command ==2){
                 System.out.println("The staff is found");
                 System.out.print("please input an id: ");
@@ -214,6 +237,7 @@ class Main {
                 System.out.println("filtered successfully");
             }
         }
+
 
     }
 
