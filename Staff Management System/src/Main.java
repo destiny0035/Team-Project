@@ -30,7 +30,23 @@ class Main {
         staff.add(extraStaff);
         System.out.println("employee information added successfully");
     }
+    public Staff fill_thestaff(){
+        System.out.println("Enter the name of the staff");
+        String name_1 = input.nextLine();
+        System.out.println("Enter the age of the staff");
+        int age_1 = input.nextInt();
+        System.out.println("Enter the id of the staff");
+        long id_1 = input.nextInt();
+        System.out.println("Enter the gender of the staff");
+        String gender_1 = input.nextLine();
+        System.out.println("Enter the position of the staff");
+        String position_1 = input.nextLine();
+        System.out.println("Enter the income of the staff");
+        double income_1 = input.nextDouble();
+        Staff temp=new Staff(name_1,age_1,id_1,gender_1,position_1,income_1);
+        return temp;
 
+    }
     public void deleteStaffInformation(int id){
         for (int i=0;i<staff.size();i++){
             if (staff.get(i).getId() == id){
@@ -128,6 +144,8 @@ class Main {
         }
     }//按id查询
 
+    //1234567
+
     public void runMenu() {
         System.out.println("///////////////////////////////////////");
         System.out.println("Staff Management System V1.0");
@@ -168,8 +186,10 @@ class Main {
             } else if (command ==1){
                 System.out.println("A new staff is added");
                 System.out.print("please input an extra staff: ");
-                String str1 = input.nextLine();
-                System.out.println("The added staff is :" + str1);
+                Staff information = fill_thestaff();
+
+                addStaffInformation(information);
+                System.out.println("The added staff is :" );
             } else if  (command ==2){
                 System.out.println("The staff is found");
                 System.out.print("please input an id: ");
