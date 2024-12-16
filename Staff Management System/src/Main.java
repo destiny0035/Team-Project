@@ -203,6 +203,11 @@ class Main {
                 catch(Exception e) {}
                 System.out.println("Reloading Complete!");
             }
+            if(command == 0)
+            {
+                System.out.println("System Closed!");
+                break;
+            }
             if (command == 1) {
                 ListAllStaff();
                 System.out.println("All staff are listed!");
