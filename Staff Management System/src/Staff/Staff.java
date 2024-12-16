@@ -81,5 +81,8 @@ package Staff;
         public void setIncome(double income) {
             this.income = income;
         }
+        public String toString(){
+            return "Name:"+  name + " "  +  "Age:"  +  age +  " "  +"Id:" +  id + "  "  +  "gender:"+ gender +" "+"position:" + position + " "   + "income:" + income +" ";
+        }
     }
 

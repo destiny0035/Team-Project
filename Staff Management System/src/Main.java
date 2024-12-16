@@ -36,20 +36,28 @@ class Main {
         for (int i=0;i<staff.size();i++){
             if (staff.get(i).getId() == id){
                 staff.remove(i);
-            }else {
-                System.out.println("no employee deleted");
+                return;
             }
         }
+        System.out.println("No employee matched");
     }
 
-    public void filterStaffInformation(String gender,int maxAge,int minAge,double income){
-        List <Staff> requiredStaff = new ArrayList<>();
-        for (int i=0;i<staff.size();i++){
-            if (staff.get(i).getGender()==gender&&staff.get(i).getAge()<maxAge&&staff.get(i).getAge()>minAge&&staff.get(i).getIncome()==income){
+    public void filterStaffInformation(double minIncome, double maxIncome) {
+        if (minIncome > maxIncome) {
+            System.out.println("Invalid income range");
+            return;
+        }
+        List<Staff> requiredStaff = new ArrayList<>();
+        for (int i = 0; i < staff.size(); i++) {
+            if (staff.get(i).getIncome() < maxIncome && staff.get(i).getIncome() > minIncome) {
                 requiredStaff.add(staff.get(i));
-            }else {
-                System.out.println("no required employee");//存在问题，使用empty
             }
+        }
+        for (Staff staff1 : requiredStaff) {
+            System.out.println(staff1);
+        }
+        if (requiredStaff.isEmpty()) {
+            System.out.println("No employee required");
         }
     }
 
