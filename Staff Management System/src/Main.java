@@ -285,14 +285,13 @@ class Main {
             }
             else if (command == 5)
             {
-                System.out.println("The staff information is filtered");
-                System.out.println("gender:  "+"minAge:+  "+"maxAge:  "+"income:  ");
-                String c = input.nextLine();
-                int d = input.nextInt();
-                int e = input.nextInt();
-                double f = input.nextDouble();
-                filterStaffInformation(c,d,e,f);
-                System.out.println("Filtered successfully!");
+                System.out.println("Enter the minIncome of the staff");
+                double d = input.nextDouble();
+                System.out.println("Enter the maxIncome of the staff");
+                double e = input.nextDouble();
+
+                filterStaffInformation(d,e);
+                System.out.println("Filtered successfully");
             }
         }
 
