@@ -290,19 +290,21 @@ class Main {
 
     public int displayMenu() {
         clearScreen();
-        System.out.println();
+        System.out.println("\033[1;34m");
         System.out.println("---Welcome---");
         System.out.println("Staff Management System");
         System.out.println("-------------------");
+        System.out.println("\033[0m\033[1;32m");
         System.out.println("1) List All staff");
         System.out.println("2) Add a New staff");
         System.out.println("3) Find & Edit staff");
         System.out.println("4) Delete staff");
         System.out.println("5) Filter staff");
+        System.out.println("\033[0m\033[1;31m");
         System.out.println("0) Exit");
-        System.out.println("-------------------");
+        System.out.println("\033[0m-------------------");
         System.out.println();
-        System.out.print("Please enter your choice : ");
+        System.out.print("\033[1;33mPlease enter your choice : \033[0m");
         int option = input.nextInt();
         System.out.println();
         if (option >= 0 && option <= 5)
