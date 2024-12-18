@@ -175,18 +175,20 @@ class Main {
         System.out.println("///////////////////////////////////////");
         System.out.println("Staff Management System (Final Version)");
         System.out.println("///////////////////////////////////////");
-        System.out.println("Now Loading.......");
-        try {
-            System.out.print("...");
-            TimeUnit.SECONDS.sleep(1);
-            System.out.print("...");
-            TimeUnit.SECONDS.sleep(1);
-            System.out.println("...");
-            System.out.println();
-        }
-        catch(Exception e) {}
-        System.out.println("Lording Complete!");
         while(true) {
+            System.out.println("Now Loading.......");
+            try {
+                System.out.print("...");
+                TimeUnit.SECONDS.sleep(1);
+                System.out.print("...");
+                TimeUnit.SECONDS.sleep(1);
+                System.out.print("...");
+                TimeUnit.SECONDS.sleep(1);
+                System.out.println("...");
+                System.out.println();
+            }
+            catch(Exception e) {}
+            System.out.println("Lording Complete!");
             int command = displayMenu();
             input.nextLine();
             if (command == -1) {
