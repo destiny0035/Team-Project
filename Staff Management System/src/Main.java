@@ -320,4 +320,3 @@ class Main {
         main.runMenu();
     }
 }
-
