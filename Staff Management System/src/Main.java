@@ -53,12 +53,14 @@ class Main {
                 requiredStaff.add(staff.get(i));
             }
         }
+        if (requiredStaff.isEmpty()) {
+            System.out.println("No employee required!");
+            return;
+        }
         for (Staff staff1 : requiredStaff) {
             System.out.println(staff1);
         }
-        if (requiredStaff.isEmpty()) {
-            System.out.println("No employee required!");
-        }
+        System.out.println("Filtered successfully!");
     }
 
     public void searchStaffInformation(int id){
@@ -84,25 +86,16 @@ class Main {
                             "Position: "+staff.get(index).getPosition()+" "+
                             "Income: "+staff.get(index).getIncome());
             System.out.println(" ");
-            input.nextLine();
             System.out.println("Do you want to edit this staff's information?");
             System.out.println("(Please enter Yes or No)");
             System.out.print("Your choice: ");
             String operation = input.nextLine();
             if(operation.equals("Yes") || operation.equals("yes")  || operation.equals("YES")){
-                if(editStaffInformation(index)) {
-                    System.out.println("Information is edited successfully!");
-                    System.out.println("Backing to the menu......");
-                }
+                if(editStaffInformation(index)) System.out.println("Information is edited successfully!");
                 else return;
             }
-            else if(operation.equals("No") || operation.equals("no") || operation.equals("NO")) {
-                System.out.println("Backing to the menu......");
-                return;
-            }
-            else {
-                System.out.println("Wrong Command!");
-            }
+            else if(operation.equals("No") || operation.equals("no") || operation.equals("NO"))return;
+            else System.out.println("Wrong Command!");
         }
     }//按id查询
 
@@ -161,6 +154,7 @@ class Main {
         System.out.println("Original Income: "+target.getIncome());
         System.out.print("New Income: ");
         newIncome = input.nextInt();
+        input.nextLine();
         if(newIncome<0.0){
             System.out.println("The input is wrong");
             System.out.println("Reloading......");
@@ -181,12 +175,14 @@ class Main {
             TimeUnit.SECONDS.sleep(1);
             System.out.print("...");
             TimeUnit.SECONDS.sleep(1);
-            System.out.println("...");
+            System.out.print("...");
             System.out.println();
         }
         catch(Exception e) {}
         System.out.println("Lording Complete!");
         while(true) {
+            System.out.print("Press enter to continue......");
+            input.nextLine();
             int command = displayMenu();
             input.nextLine();
             if (command == -1) {
@@ -210,6 +206,7 @@ class Main {
             }
             if (command == 1) {
                 ListAllStaff();
+                System.out.println();
                 System.out.println("All staff are listed!");
             }
             else if (command == 2) {
@@ -225,6 +222,7 @@ class Main {
                 if(age_1<18||age_1>60){
                     System.out.println("The input is wrong!");
                     System.out.println("Reloading......");
+                    input.nextLine();
                     continue;
                 }
                 System.out.print("Enter the id of the staff: ");
@@ -232,6 +230,7 @@ class Main {
                 if(id_1<0||id_1>=1.00E12){
                     System.out.println("The input is wrong!");
                     System.out.println("Reloading......");
+                    input.nextLine();
                     continue;
                 }
                 System.out.print("Enter the gender of the staff (Male/Female): ");
@@ -254,19 +253,23 @@ class Main {
                 if(income_1<0.0){
                     System.out.println("The input is wrong!");
                     System.out.println("Reloading......");
+                    input.nextLine();
                     continue;
                 }
                 Staff temp=new Staff(name_1,age_1,id_1,gender_1,position_1,income_1);
+                input.nextLine();
                 addStaffInformation(temp);
             }
             else if  (command ==3) {
                 System.out.print("Please input the id of the staff you want to search: ");
                 int searchId = input.nextInt();
+                input.nextLine();
                 searchStaffInformation(searchId);
             }
             else if (command ==4) {
                 System.out.print("Please input the id of the staff you want to delete: ");
                 int deleteId = input.nextInt();
+                input.nextLine();
                 System.out.println();
                 deleteStaffInformation(deleteId);
             }
@@ -276,9 +279,10 @@ class Main {
                 System.out.println();
                 System.out.print("Enter the maxIncome of the staff: ");
                 double maxIncome = input.nextDouble();
+                input.nextLine();
                 System.out.println();
                 filterStaffInformation(minIncome,maxIncome);
-                System.out.println("Filtered successfully!");
+
             }
         }
     }
